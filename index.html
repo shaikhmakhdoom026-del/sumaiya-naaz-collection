@@ -61,7 +61,7 @@
     </div>
   </main>
 
-  <!-- PRODUCT MODAL (3 PHOTOS + DESCRIPTION) -->
+  <!-- PRODUCT MODAL (PHOTOS + DESCRIPTION) -->
   <div id="product-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col">
       <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-9 h-9 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition">
@@ -74,7 +74,7 @@
           <img id="modal-img" src="" class="w-full h-full object-cover">
         </div>
 
-        <!-- Thumbnails for 3 photos -->
+        <!-- Thumbnails for photos -->
         <div id="modal-thumbs" class="flex items-center space-x-3 overflow-x-auto pb-1"></div>
 
         <div class="space-y-2">
@@ -161,20 +161,24 @@
             <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Description</label>
             <textarea id="p-desc" rows="3" required placeholder="Fabric details, dupatta work..." class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-rose-400 focus:outline-none"></textarea>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          
+          <!-- DIRECT FILE UPLOAD INPUTS -->
+          <div class="space-y-3 border-t border-b py-3">
+            <label class="block text-xs font-bold text-gray-800 uppercase">Select Photos from device Gallery/File</label>
             <div>
-              <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Photo 1 (Main)</label>
-              <input type="url" id="p-photo1" required placeholder="https://..." class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-rose-400 focus:outline-none">
+              <label class="block text-xs text-gray-600 mb-1">Photo 1 (Main Photo)</label>
+              <input type="file" id="p-file1" accept="image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Photo 2</label>
-              <input type="url" id="p-photo2" placeholder="https://..." class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-rose-400 focus:outline-none">
+              <label class="block text-xs text-gray-600 mb-1">Photo 2 (Optional)</label>
+              <input type="file" id="p-file2" accept="image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Photo 3</label>
-              <input type="url" id="p-photo3" placeholder="https://..." class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-rose-400 focus:outline-none">
+              <label class="block text-xs text-gray-600 mb-1">Photo 3 (Optional)</label>
+              <input type="file" id="p-file3" accept="image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100">
             </div>
           </div>
+
           <div class="flex items-center space-x-3 pt-2">
             <button type="submit" class="flex-1 py-3 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-xl text-sm transition">Save Sharara Design</button>
             <button type="button" onclick="resetForm()" class="py-3 px-4 bg-gray-200 text-gray-700 font-semibold rounded-xl text-sm hover:bg-gray-300">Reset</button>
@@ -193,9 +197,7 @@
   <script>
     let products = JSON.parse(localStorage.getItem('snc_products')) || [
       { id: 1, title: 'Sharara Design 001', description: 'Heavy embroidered bridal Sharara set with net dupatta.', photo_1: 'https://picsum.photos/600/800?random=1', photo_2: 'https://picsum.photos/600/800?random=2', photo_3: 'https://picsum.photos/600/800?random=3' },
-      { id: 2, title: 'Sharara Design 002', description: 'Rich velvet fabric with golden metallic border work.', photo_1: 'https://picsum.photos/600/800?random=4', photo_2: 'https://picsum.photos/600/800?random=5', photo_3: 'https://picsum.photos/600/800?random=6' },
-      { id: 3, title: 'Sharara Design 003', description: 'Pastel pink georgette designer Sharara for festive occasions.', photo_1: 'https://picsum.photos/600/800?random=7', photo_2: 'https://picsum.photos/600/800?random=8', photo_3: 'https://picsum.photos/600/800?random=9' },
-      { id: 4, title: 'Sharara Design 004', description: 'Traditional mirror work Sharara suit with heavy dupatta.', photo_1: 'https://picsum.photos/600/800?random=10', photo_2: 'https://picsum.photos/600/800?random=11', photo_3: 'https://picsum.photos/600/800?random=12' }
+      { id: 2, title: 'Sharara Design 002', description: 'Rich velvet fabric with golden metallic border work.', photo_1: 'https://picsum.photos/600/800?random=4', photo_2: 'https://picsum.photos/600/800?random=5', photo_3: 'https://picsum.photos/600/800?random=6' }
     ];
 
     let cart = [];
@@ -220,7 +222,7 @@
         <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group">
           <div class="aspect-[4/5] w-full bg-gray-100 overflow-hidden relative cursor-pointer" onclick="openProductModal(${p.id})">
             <img src="${p.photo_1}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-1 rounded-md">3 Photos</span>
+            <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-1 rounded-md">Photos Available</span>
           </div>
           <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
             <div>
@@ -367,19 +369,44 @@
       }
     }
 
-    function handleProductSubmit(e) {
+    // Convert file to Base64 data string
+    const readFileAsBase64 = (file) => {
+      return new Promise((resolve) => {
+        if (!file) resolve(null);
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(file);
+      });
+    };
+
+    async function handleProductSubmit(e) {
       e.preventDefault();
       const id = document.getElementById('edit-id').value;
       const title = document.getElementById('p-title').value.trim();
       const description = document.getElementById('p-desc').value.trim();
-      const photo_1 = document.getElementById('p-photo1').value.trim();
-      const photo_2 = document.getElementById('p-photo2').value.trim() || null;
-      const photo_3 = document.getElementById('p-photo3').value.trim() || null;
+
+      const f1 = document.getElementById('p-file1').files[0];
+      const f2 = document.getElementById('p-file2').files[0];
+      const f3 = document.getElementById('p-file3').files[0];
+
+      let photo_1 = await readFileAsBase64(f1);
+      let photo_2 = await readFileAsBase64(f2);
+      let photo_3 = await readFileAsBase64(f3);
 
       if (id) {
         const p = products.find(x => x.id == id);
-        if (p) { p.title = title; p.description = description; p.photo_1 = photo_1; p.photo_2 = photo_2; p.photo_3 = photo_3; }
+        if (p) { 
+          p.title = title; 
+          p.description = description; 
+          if (photo_1) p.photo_1 = photo_1;
+          if (photo_2) p.photo_2 = photo_2;
+          if (photo_3) p.photo_3 = photo_3;
+        }
       } else {
+        if (!photo_1) {
+          alert("Please choose at least Photo 1!");
+          return;
+        }
         const newProd = { id: Date.now(), title, description, photo_1, photo_2, photo_3 };
         products.unshift(newProd);
       }
@@ -417,9 +444,6 @@
       document.getElementById('edit-id').value = p.id;
       document.getElementById('p-title').value = p.title;
       document.getElementById('p-desc').value = p.description;
-      document.getElementById('p-photo1').value = p.photo_1;
-      document.getElementById('p-photo2').value = p.photo_2 || '';
-      document.getElementById('p-photo3').value = p.photo_3 || '';
       document.getElementById('form-heading').innerText = "Edit Sharara Design";
     }
 
